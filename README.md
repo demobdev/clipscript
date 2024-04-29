@@ -1,7 +1,14 @@
 
-### To be able to test the extension you need first to 
+# ClipScript
 
-download the extension from [here](https://drive.google.com/file/d/15fAo8P3SRmlW8rLtE2XEVDjFp_f6dZAZ/view?usp=sharing)
+## Introduction
+ClipScript is an innovative Chrome extension that enhances the YouTube viewing experience by providing summarizations and interactive chat functionalities directly on YouTube video pages. Powered by advanced AI, ClipScript aims to make video content more accessible and engaging.
+
+## Features
+- **Video Summarization**: Get concise summaries of YouTube videos instantly.
+- **Interactive Chat**: Engage with the video content through AI-powered interactive chats.
+- **Seamless Integration**: Works directly within your YouTube interface without disrupting the viewing experience.
+
 
 1. go to chrome settings
 2. click on extensions

@@ -3,12 +3,12 @@ import { getFirestore } from "@firebase/firestore";
 import { getStorage } from "@firebase/storage";
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBu2JmraTFtingH2aPClxOhWr-0xoU-dsg",
-  authDomain: "chatvideoyt-4e2a7.firebaseapp.com",
-  projectId: "chatvideoyt-4e2a7",
-  storageBucket: "chatvideoyt-4e2a7.appspot.com",
-  messagingSenderId: "519895359716",
-  appId: "1:519895359716:web:c94c3d3bba7672c0580cf1",
+  apiKey: "AIzaSyAk3RDdNOPDiOzie1vbcNW0dVBeravUxrc",
+  authDomain: "clipscript.firebaseapp.com",
+  projectId: "clipscript",
+  storageBucket: "clipscript.appspot.com",
+  messagingSenderId: "813275162958",
+  appId: "1:813275162958:web:cef67b29a293ce427f961f",
 };
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();

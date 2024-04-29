@@ -10,7 +10,7 @@ function Header() {
        lg:space-x-6"
       >
         {/* logo */}
-        <p className="text-lg font-bold text-black/70 italic">ChatVideo</p>
+        <p className="text-lg font-bold text-black/70 italic">ClipScript</p>
         {/* navlinks */}
         <div className="flex space-x-3">
           <Link className="navLink" href="#Features">
@@ -27,10 +27,10 @@ function Header() {
 
       {/* right */}
       <div className="w-full space-x-4 flex items-center justify-end col-span-1">
-        <Link className="navLink" href="/Pricing">
-          signIn
+        <Link className="navLink" href="/signin">
+          Sign In
         </Link>
-        <button className="rounded-3xl bg-[#2563EB] text-white px-4 py-2.5 text-sm hover:opacity-85">
+        <button className="rounded-3xl bg-[#e67a1c] text-white px-4 py-2.5 text-sm hover:opacity-85">
           {" "}
           get started today
         </button>

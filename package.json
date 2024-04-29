@@ -1,5 +1,5 @@
 {
-  "name": "chatvideoyt",
+  "name": "clipscript",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,19 +10,17 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^2.4.0",
-    "axios": "^1.6.7",
-    "firebase": "^10.8.0",
+    "axios": "^1.6.8",
+    "firebase": "^10.11.1",
     "next": "14.1.0",
-    "next-auth": "^4.24.5",
-    "react": "^18",
-    "react-dom": "^18",
-    "stripe": "^14.14.0"
+    "stripe": "^14.25.0",
+    "next-auth": "^4.x"  
   },
   "devDependencies": {
-    "autoprefixer": "^10.0.1",
+    "autoprefixer": "^10.4.19",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0"
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }

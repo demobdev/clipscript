@@ -47,7 +47,7 @@ export default Testimonials;
 const testimonailItems = [
   {
     id: 0,
-    content: `chatVideo is so easy to use I can’t help but wonder if it’s really doing the things the government expects me to do.`,
+    content: `ClipScript is so easy to use I can’t help but wonder if it’s really doing the things the government expects me to do.`,
     author: {
       name: "Sheryl Berge",
       title: "CEO at Lynch LLC",
@@ -55,7 +55,7 @@ const testimonailItems = [
   },
   {
     id: 1,
-    content: `The best part about TaxPal is every time I pay my employees, my bank balance doesn’t go down like it used to. Looking forward to spending this extra cash when I figure out why my card is being declined.`,
+    content: `The best part about ClipScript is every time I pay my employees, my bank balance doesn’t go down like it used to. Looking forward to spending this extra cash when I figure out why my card is being declined.`,
     author: {
       name: "Leland Kiehn",
       title: "Founder of Kiehn and Sons",
@@ -79,7 +79,7 @@ const testimonailItems = [
   },
   {
     id: 5,
-    content: `chatVideo is so easy to use I can’t help but wonder if it’s really doing the things the government expects me to do.`,
+    content: `ClipScript is so easy to use I can’t help but wonder if it’s really doing the things the government expects me to do.`,
     author: {
       name: "Sheryl Berge",
       title: "CEO at Lynch LLC",

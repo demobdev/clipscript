@@ -1,37 +1,49 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, } from "react";
 import { db } from "@/firebase";
 import axios from "axios";
 import { doc, getDoc } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 
-// custom hook to see the status of the plan either paid or not.
-
 export function usePlan() {
   const { data: session } = useSession();
-  const [active, setActivePlan] = useState();
+  const [active, setActivePlan] = useState(false);
   const [customerPortal, setCustomerPortal] = useState();
 
-  // make it separate in case we need it else where.
   const checkActivePlanOrNot = async () => {
-    const userDoc = await getDoc(doc(db, "users", session?.user?.email));
-    if (!userDoc.exists()) return;
-    const subId = userDoc.data().subId;
-    setCustomerPortal(userDoc.data().portalUrl);
-    const response = await axios.post(
-      `/api/checkout_sessions/${subId}?email=${session?.user?.email}`
-    );
-    const data = response.data;
+    try {
+      const userDoc = await getDoc(doc(db, "users", session?.user?.email));
+      if (!userDoc.exists()) {
+        console.error("User document does not exist");
+        return;
+      }
 
-    if (data.status == "active") {
-      setActivePlan(true);
-    } else {
+      const userData = userDoc.data();
+      const { subId, portalUrl } = userData;
+
+      if (!subId) {
+        console.error("Subscription ID is missing");
+        return;
+      }
+
+      setCustomerPortal(portalUrl);
+
+      const response = await axios.post(`/api/checkout_sessions/${subId}`, {
+        email: session?.user?.email
+      });
+      const data = response.data;
+
+      setActivePlan(data.status === "active");
+    } catch (error) {
+      console.error("Failed to check active plan:", error);
       setActivePlan(false);
     }
   };
+
   useEffect(() => {
-    if (!session) return;
-    checkActivePlanOrNot();
+    if (session && session.user && session.user.email) {
+      checkActivePlanOrNot();
+    }
   }, [session]);
 
   return { checkActivePlanOrNot, active, customerPortal };

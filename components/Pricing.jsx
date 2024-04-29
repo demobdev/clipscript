@@ -1,67 +1,73 @@
-import React from "react";
-import CTAButton from "./CTAButton";
+import React, { useState, useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { pay } from "@/app/actions/actions";
 import { usePlan } from "@/hooks/usePlan";
-import { useRouter } from "next/navigation";
+import CTAButton from "./CTAButton";
 
 function Pricing({ plansPage }) {
-  const { data: session } = useSession();
-  const { active, customerPortal } = usePlan();
+  const { data: session, status: sessionStatus } = useSession();
+  const { active, customerPortal, error, loading } = usePlan();
   const router = useRouter();
+  const [loadingState, setLoadingState] = useState(false);
+
+  useEffect(() => {
+    if (sessionStatus === 'loading' || loading) {
+      setLoadingState(true);
+    } else {
+      setLoadingState(false);
+    }
+  }, [sessionStatus, loading]);
+
+  const handleButtonClick = () => {
+    if (!session) {
+      signIn("google");
+    } else if (active) {
+      router.replace(customerPortal);
+    } else {
+      pay(session);
+    }
+  };
+
   return (
     <div
       id="Pricing"
-      className="min-h-screen w-full items-center justify-start flex flex-col bg-black pt-20 pb-12 px-6"
+      className="min-h-screen w-full flex flex-col items-center justify-start bg-black pt-20 pb-12 px-6"
     >
       <h2 className="text-3xl text-white font-medium text-center">
         Simple pricing, for everyone.
       </h2>
       <p className="w-1/2 text-center mt-4 text-white">
-        It doesn’t matter what size your business is, our software won’t work
-        well for you.
+        It doesn’t matter what size your business is, our software scales with you.
       </p>
-      <div className="w-full items-center justify-center flex py-20">
-        <div
-          className="rounded-xl min-h-[400px] bg-white min-w-[25%] shadow-white/10 shadow-xl
-         text-black py-4 px-4 items-start justify-start flex flex-col relative"
-        >
-          <span className="w-full flex items-center justify-between">
-            <h2 className="text-black font-medium text-4xl py-4">$9.99</h2>
-            {plansPage ? (
-              <button
-                onClick={() =>
-                  session
-                    ? active
-                      ? router.replace(customerPortal)
-                      : pay(session)
-                    : signIn("google")
-                }
-              >
-                {session
-                  ? active
-                    ? "handle plan"
-                    : "subscribe"
-                  : "signIn first"}
-              </button>
+      <div className="flex items-center justify-center py-20 w-full">
+        <div className="bg-white rounded-xl min-h-[400px] min-w-[25%] shadow-xl py-4 px-4 flex flex-col items-start justify-start relative">
+          <div className="flex items-center justify-between w-full">
+            <h2 className="text-4xl font-medium text-black py-4">$9.99</h2>
+            {loadingState ? (
+              <p>Loading...</p>
             ) : (
-              <CTAButton />
+              <button
+                onClick={handleButtonClick}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                {session ? (active ? "Manage Plan" : "Subscribe") : "Sign In"}
+              </button>
             )}
-          </span>
-          <span className="w-full h-[0.5px] bg-black/20 mb-8" />
+          </div>
+          <div className="bg-black/20 w-full h-[0.5px] mb-8" />
           <h2 className="text-xl font-medium">Simple Plan</h2>
-          <p className="text-sm">get instant access to the extension.</p>
-          <span className="space-y-4 mt-6 ">
-            <p className="text-sm text-black/80">
-              ✓ summarize any youtube video
-            </p>{" "}
-            <p className="text-sm text-black/80">
-              ✓ chat with any youtube video using AI.
-            </p>{" "}
-            <p className="text-sm text-black/80">
-              ✓ handle your own api key for better tracking
-            </p>{" "}
-          </span>
+          <p className="text-sm">Get instant access to the extension.</p>
+          <div className="mt-6 space-y-4">
+            <p className="text-sm text-black/80">✓ Summarize any YouTube video</p>
+            <p className="text-sm text-black/80">✓ Chat with any YouTube video using AI.</p>
+            <p className="text-sm text-black/80">✓ Handle your own API key for better tracking.</p>
+          </div>
+          {error && (
+            <p className="text-red-500 text-sm mt-2">
+              Error: {error.message}
+            </p>
+          )}
         </div>
       </div>
     </div>
